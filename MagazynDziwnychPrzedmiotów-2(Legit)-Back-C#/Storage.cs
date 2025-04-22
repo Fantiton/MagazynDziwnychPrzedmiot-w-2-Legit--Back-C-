@@ -51,6 +51,7 @@ namespace MagazynDziwnychPrzedmiotów_2_Legit__Back_C_
                 if (GetContentWeight() + item.GetWeight() <= MaxCombinedWeight)
                 {
                     CurrentItemCount++;
+                    items.Add(item);
                     Console.WriteLine($"Dodano przedmiot: {item.GetName()}");
                 }
                 else
