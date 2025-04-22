@@ -22,7 +22,10 @@ void Main()
         case "list":
             ListAll();
             break;
-        }
+        case "show":
+            ShowItem();
+            break;
+    }
 
     void AddItem()
     {
@@ -40,5 +43,20 @@ void Main()
 
     void ListAll(){
         storage.ListAll();
+    }
+
+    void ShowItem()
+    {
+        Console.WriteLine("Podaj nazwę przedmiotu: ");
+        string name = Console.ReadLine();
+        foreach (var item in storage.items)
+        {
+            if (item.GetName() == name)
+            {
+                Console.WriteLine(item.description());
+                return;
+            }
+        }
+        Console.WriteLine("Nie znaleziono przedmiotu.");
     }
 }

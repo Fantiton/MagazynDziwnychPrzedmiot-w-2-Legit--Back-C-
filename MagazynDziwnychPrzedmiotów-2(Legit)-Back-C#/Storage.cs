@@ -19,6 +19,11 @@ namespace MagazynDziwnychPrzedmiotów_2_Legit__Back_C_
             MaxCombinedWeight = maxCombinedWeight;
         }
 
+        public List<Item> GetItems()
+        {
+            return items;
+        }
+
         public void ListAll()
         {
             Console.WriteLine("Lista przedmiotów w magazynie:");
