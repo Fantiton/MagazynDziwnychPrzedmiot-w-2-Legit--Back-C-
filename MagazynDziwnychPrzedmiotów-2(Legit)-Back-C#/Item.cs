@@ -22,7 +22,7 @@ namespace MagazynDziwnychPrzedmiotów_2_Legit__Back_C_
             IsFragile = isFragile;
         }
 
-        string description()
+        public string description()
         {
             var descriptionObject = new
             {
@@ -33,6 +33,26 @@ namespace MagazynDziwnychPrzedmiotów_2_Legit__Back_C_
             };
             string descriptionJSON = JsonSerializer.Serialize(descriptionObject);
             return descriptionJSON;
+        }
+
+        public string GetName()
+        {
+            return Name;
+        }
+
+        public float GetWeight()
+        {
+            return Weight;
+        }
+
+        public int GetStrangenessLevel()
+        {
+            return StrangenessLevel;
+        }
+
+        public bool GetIsFragile()
+        {
+            return IsFragile;
         }
     }
 }
