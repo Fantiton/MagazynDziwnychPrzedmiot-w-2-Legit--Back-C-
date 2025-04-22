@@ -11,6 +11,8 @@ float maxCombinedWeight = float.Parse(Console.ReadLine());
 
 Storage storage = new Storage(capacity, maxCombinedWeight);
 
+Main();
+
 void Main()
 {
     string input = Console.ReadLine();
