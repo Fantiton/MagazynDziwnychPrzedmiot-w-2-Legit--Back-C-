@@ -39,24 +39,31 @@ void Main()
         bool isFragile = Console.ReadLine().ToUpper() == "TAK";
         Item item = new Item(name, weight, strangenessLevel, isFragile);
         storage.AddItem(item);
+
+        Main();
     }
 
     void ListAll(){
         storage.ListAll();
+
+        Main();
     }
 
     void ShowItem()
     {
         Console.WriteLine("Podaj nazwę przedmiotu: ");
         string name = Console.ReadLine();
-        foreach (var item in storage.items)
+        foreach (var item in storage.GetItems())
         {
             if (item.GetName() == name)
             {
                 Console.WriteLine(item.description());
-                return;
+
+                Main();
             }
         }
         Console.WriteLine("Nie znaleziono przedmiotu.");
+
+        Main();
     }
 }
