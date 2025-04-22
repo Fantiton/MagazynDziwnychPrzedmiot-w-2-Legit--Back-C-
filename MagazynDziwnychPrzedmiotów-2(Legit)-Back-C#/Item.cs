@@ -29,11 +29,10 @@ namespace MagazynDziwnychPrzedmiotów_2_Legit__Back_C_
                 Name,
                 Weight,
                 StrangenessLevel,
-                IsFragile,
+                IsFragile = IsFragile ? "TAK" : "NIE",
             };
             string descriptionJSON = JsonSerializer.Serialize(descriptionObject);
             return descriptionJSON;
-
         }
     }
 }
