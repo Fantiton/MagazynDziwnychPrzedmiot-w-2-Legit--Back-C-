@@ -17,7 +17,7 @@ namespace MagazynDziwnychPrzedmiotów_2_Legit__Back_C_
         public Item(string name, float weight, int strangenessLevel, bool isFragile)
         {
             Name = name;
-            Weight = weight;
+            Weight = (float)Math.Round(weight);
             StrangenessLevel = strangenessLevel;
             IsFragile = isFragile;
         }
@@ -27,7 +27,7 @@ namespace MagazynDziwnychPrzedmiotów_2_Legit__Back_C_
             var descriptionObject = new
             {
                 Name,
-                Weight,
+                Weight = Weight.ToString("F3"),
                 StrangenessLevel,
                 IsFragile = IsFragile ? "TAK" : "NIE",
             };
