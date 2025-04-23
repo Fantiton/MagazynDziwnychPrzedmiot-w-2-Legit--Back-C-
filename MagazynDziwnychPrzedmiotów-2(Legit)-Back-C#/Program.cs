@@ -1,32 +1,66 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using MagazynDziwnychPrzedmiotów_2_Legit__Back_C_;
 
-Console.WriteLine("Podaj pojemność magazynu: ");
-
-int capacity = int.Parse(Console.ReadLine());
-
-Console.WriteLine("Podaj maksymalną wagę zawartości magazynu: ");
-
-float maxCombinedWeight = float.Parse(Console.ReadLine());
-
-Storage storage = new Storage(capacity, maxCombinedWeight);
+List<Storage> storages = new List<Storage>();
+Storage activeStorage;
 
 Main();
 
 void Main()
 {
+    Console.WriteLine("Wpisz komendę");
+
     string input = Console.ReadLine();
 
     switch(input){
-        case "add":
-            AddItem();
+        case "sc":
+            CreateStorage();
             break;
-        case "list":
-            ListAll();
+        case "sl":
+            //ListStorages();
             break;
-        case "show":
+        case "slp":
+            //ListStoragesP();
+            break;
+        case "m":
+            //ShowStorage();
+            break;
+        case "ml":
+            //ListStorage();
+            break;
+        case "ml foh":
+            //ListStorageFOH();
+            break;
+        case "ms":
             ShowItem();
             break;
+        case "ma":
+            //AverageWeirdness();
+            break;
+        case "mc":
+            AddItem();
+            break;
+        default:
+            Main();
+            break;
+    }
+
+
+
+    void CreateStorage()
+    {
+        Console.WriteLine("Podaj pojemność magazynu. (W ilości przedmiotów)");
+
+        int capacity = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Podaj maksymalny udźwig magazynu. (W kg)");
+
+        float maxCombinedWeight = float.Parse(Console.ReadLine());
+
+        Storage storage = new Storage(capacity, maxCombinedWeight);
+
+        storages.Add(storage);
+        activeStorage = storage;
     }
 
     void AddItem()
