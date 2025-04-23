@@ -32,13 +32,13 @@ void Main()
             //ListStorageFOH();
             break;
         case "ms":
-            //ShowItem();
+            ShowItem();
             break;
         case "ma":
-            //AverageWeirdness();
+            AverageWeirdness();
             break;
         case "mc":
-            //AddItem();
+            AddItem();
             break;
         default:
             Main();
@@ -121,29 +121,38 @@ void Main()
         else
         {
             activeStorage.ListAll();
+            Main();
+            return;
         }
-        Main();
     }
 
-    /*
     void AddItem()
     {
-        Console.WriteLine("Podaj nazwę przedmiotu: ");
-        string name = Console.ReadLine();
-        Console.WriteLine("Podaj wagę przedmiotu: ");
-        float weight = float.Parse(Console.ReadLine());
-        Console.WriteLine("Podaj poziom dziwności przedmiotu: ");
-        int strangenessLevel = int.Parse(Console.ReadLine());
-        Console.WriteLine("Czy przedmiot jest kruchy? (TAK/NIE): ");
-        bool isFragile = Console.ReadLine().ToUpper() == "TAK";
-        Item item = new Item(name, weight, strangenessLevel, isFragile);
-        storage.AddItem(item);
-
-        Main();
+        if (activeStorage == null)
+        {
+            Console.WriteLine("Nie ma żadnych magazynów.");
+            Main();
+            return;
+        }
+        else
+        {
+            Console.WriteLine("Podaj nazwę przedmiotu: ");
+            string name = Console.ReadLine();
+            Console.WriteLine("Podaj wagę przedmiotu: ");
+            float weight = float.Parse(Console.ReadLine());
+            Console.WriteLine("Podaj poziom dziwności przedmiotu: ");
+            int strangenessLevel = int.Parse(Console.ReadLine());
+            Console.WriteLine("Czy przedmiot jest kruchy? (TAK/NIE): ");
+            bool isFragile = Console.ReadLine().ToUpper() == "TAK";
+            Item item = new Item(name, weight, strangenessLevel, isFragile);
+            activeStorage.AddItem(item);
+            Main();
+            return;
+        }
     }
 
     void ListAll(){
-        storage.ListAll();
+        activeStorage.ListAll();
 
         Main();
     }
@@ -152,7 +161,7 @@ void Main()
     {
         Console.WriteLine("Podaj nazwę przedmiotu: ");
         string name = Console.ReadLine();
-        foreach (var item in storage.GetItems())
+        foreach (var item in activeStorage.GetItems())
         {
             if (item.GetName() == name)
             {
@@ -164,6 +173,29 @@ void Main()
         Console.WriteLine("Nie znaleziono przedmiotu.");
 
         Main();
+        return;
     }
-    */
+
+    void AverageWeirdness()
+    {
+        if (activeStorage == null)
+        {
+            Console.WriteLine("Nie ma żadnych magazynów.");
+            Main();
+            return;
+        }
+        else
+        {
+            float totalWeirdness = 0;
+            int itemCount = activeStorage.GetCurrentItemCount();
+            foreach (var item in activeStorage.GetItems())
+            {
+                totalWeirdness += item.GetStrangenessLevel();
+            }
+            float averageWeirdness = totalWeirdness / itemCount;
+            Console.WriteLine($"Średni poziom dziwności: {averageWeirdness:F1}");
+            Main();
+            return;
+        }
+    }
 }
