@@ -140,9 +140,9 @@ void Main()
             for (int i = 0; i < storages.Count; i++)
             {
                 Console.WriteLine("Magazyn nr. " + (i + 1).ToString());
-                int  fill = storages[i].GetCurrentItemCount();
-                int capacity = storages[i].GetCapacity();
-                float fillPercentage = (float)fill / capacity * 100;
+                float  fill = storages[i].GetContentWeight();
+                float maxContentWeight = storages[i].GetMaxCombinedWeight();
+                float fillPercentage = (float)fill / maxContentWeight * 100;
                 Console.WriteLine($"Zajętość: {fillPercentage:F1}%");
             }
         }
@@ -175,11 +175,14 @@ void Main()
         else
         {
             Console.WriteLine("Podaj wagę");
-
             float weight = (float)Math.Round(float.Parse(Console.ReadLine()), 3);
-
-            List<Item> items = activeStorage.GetItems();
-            List<Item> filteredItems = items.Where(item => item.GetWeight() > weight || item.GetStrangenessLevel() > 0).ToList();
+            List<Item> result = activeStorage.ListFragileOrheavy(weight);
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.description());
+            }
+            Main();
+            return;
         }
     }
 
@@ -243,14 +246,7 @@ void Main()
         }
         else
         {
-            float totalWeirdness = 0;
-            int itemCount = activeStorage.GetCurrentItemCount();
-            foreach (var item in activeStorage.GetItems())
-            {
-                totalWeirdness += item.GetStrangenessLevel();
-            }
-            float averageWeirdness = totalWeirdness / itemCount;
-            Console.WriteLine($"Średni poziom dziwności: {averageWeirdness:F1}");
+            Console.WriteLine($"Średni poziom dziwności: {activeStorage.AverageWeirdness():F1}");
             Main();
             return;
         }

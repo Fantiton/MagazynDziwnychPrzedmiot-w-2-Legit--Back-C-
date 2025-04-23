@@ -59,27 +59,85 @@ namespace MagazynDziwnychPrzedmiotów_2_Legit__Back_C_
             return totalWeight;
         }
 
-        public void AddItem(Item item)
+        public bool AddItem(Item item)
         {
             if (CurrentItemCount < Capacity)
             {
                 if (GetContentWeight() + item.GetWeight() <= MaxCombinedWeight)
                 {
-                    CurrentItemCount++;
-                    items.Add(item);
-                    Console.WriteLine($"Dodano przedmiot: {item.GetName()}");
+                    if (item.GetStrangenessLevel() == 7 && item.GetIsFragile())
+                    {
+                        if (CurrentItemCount < (Capacity * 0.5))
+                        {
+                            CurrentItemCount++;
+                            items.Add(item);
+                            Console.WriteLine($"Dodano przedmiot: {item.GetName()}");
+                            return true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Zbyt ryzykowny przedmiot przy obecnym zapełnieniu");
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        CurrentItemCount++;
+                        items.Add(item);
+                        Console.WriteLine($"Dodano przedmiot: {item.GetName()}");
+                        return true;
+                    }  
                 }
                 else
                 {
                     Console.WriteLine("Przedmiot jest zbyt ciężki");
+                    return false;
                 }
             }
             else
             {
                 Console.WriteLine("Magazyn jest pełny.");
+                return false;
             }
         }
 
+        public bool DeleteItem(string itemName)
+        {
+            foreach (var item in items)
+            {
+                if (item.GetName() == itemName)
+                {
+                    items.Remove(item);
+                    CurrentItemCount--;
+                    Console.WriteLine($"Usunięto przedmiot: {itemName}");
+                    return true;
+                }
+            }
+            return false;
+        }
 
+        public float AverageWeirdness()
+        {
+            if (CurrentItemCount == 0)
+            {
+                Console.WriteLine("Brak przedmiotów w magazynie.");
+                return 0;
+            }
+            float totalWeirdness = 0;
+            int itemCount = CurrentItemCount;
+            foreach (var item in items)
+            {
+                totalWeirdness += item.GetStrangenessLevel();
+            }
+            float averageWeirdness = totalWeirdness / itemCount;
+            return averageWeirdness;
+        }
+
+        public List<Item> ListFragileOrheavy(float weight)
+        {
+
+            List<Item> filteredItems = items.Where(item => item.GetWeight() > weight || item.GetStrangenessLevel() > 0).ToList();
+            return filteredItems;
+        }
     }
 }
