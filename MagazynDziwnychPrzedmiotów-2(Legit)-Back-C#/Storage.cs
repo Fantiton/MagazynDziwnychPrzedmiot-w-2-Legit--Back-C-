@@ -24,6 +24,21 @@ namespace MagazynDziwnychPrzedmiotów_2_Legit__Back_C_
             return items;
         }
 
+        public int GetCapacity()
+        {
+            return Capacity;
+        }
+
+        public int GetCurrentItemCount()
+        {
+            return CurrentItemCount;
+        }
+
+        public float GetMaxCombinedWeight()
+        {
+            return MaxCombinedWeight;
+        }
+
         public void ListAll()
         {
             Console.WriteLine("Lista przedmiotów w magazynie:");
