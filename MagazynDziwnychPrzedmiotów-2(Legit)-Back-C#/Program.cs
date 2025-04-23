@@ -20,16 +20,16 @@ void Main()
             ListStorages();
             break;
         case "slp":
-            //ListStoragesP();
+            ListStoragesP();
             break;
         case "m":
             ShowStorage();
             break;
         case "ml":
-            //ListStorage();
+            ListStorage();
             break;
         case "ml foh":
-            //ListStorageFOH();
+            ListStorageFOH();
             break;
         case "ms":
             ShowItem();
@@ -110,6 +110,29 @@ void Main()
         Main();
     }
 
+    void ListStoragesP()
+    {
+        if (storages.Count == 0)
+        {
+            Console.WriteLine("Nie ma żadnych magazynów.");
+            Main();
+            return;
+        }
+        else
+        {
+            Console.WriteLine("Lista magazynów:");
+            for (int i = 0; i < storages.Count; i++)
+            {
+                Console.WriteLine("Magazyn nr. " + (i + 1).ToString());
+                int  fill = storages[i].GetCurrentItemCount();
+                int capacity = storages[i].GetCapacity();
+                float fillPercentage = (float)fill / capacity * 100;
+                Console.WriteLine($"Zajętość: {fillPercentage:F1}%");
+            }
+        }
+        Main();
+    }
+
     void ListStorage()
     {
         if (activeStorage == null)
@@ -123,6 +146,24 @@ void Main()
             activeStorage.ListAll();
             Main();
             return;
+        }
+    }
+
+    void ListStorageFOH(){
+        if (activeStorage == null)
+        {
+            Console.WriteLine("Nie ma żadnych magazynów.");
+            Main();
+            return;
+        }
+        else
+        {
+            Console.WriteLine("Podaj wagę");
+
+            float weight = (float)Math.Round(float.Parse(Console.ReadLine()), 3);
+
+            List<Item> items = activeStorage.GetItems();
+            List<Item> filteredItems = items.Where(item => item.GetWeight() > weight || item.GetStrangenessLevel() > 0).ToList();
         }
     }
 
