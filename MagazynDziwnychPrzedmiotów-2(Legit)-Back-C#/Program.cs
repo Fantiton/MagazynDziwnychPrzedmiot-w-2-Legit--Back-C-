@@ -22,6 +22,9 @@ void Main()
         case "slp":
             ListStoragesP();
             break;
+        case "sch":
+            ChangeActiveStorage();
+            break;
         case "m":
             ShowStorage();
             break;
@@ -39,6 +42,19 @@ void Main()
             break;
         case "mc":
             AddItem();
+            break;
+        case "help":
+            Console.WriteLine("sc - stwórz magazyn \n" +
+                              " sl - lista magazynów \n" +
+                              " slp - lista magazynów z pojemnością \n" +
+                              " sch - zmień aktywny magazyn \n" +
+                              " m - pokaż aktywny magazyn \n" +
+                              " ml - lista przedmiotów w aktywnym magazynie \n" +
+                              " ml foh - lista przedmiotów w aktywnym magazynie z wagą większą niż podana \n" +
+                              " ms - pokaż przedmiot \n" +
+                              " ma - średni poziom dziwności w aktywnym magazynie \n" +
+                              " mc - dodaj przedmiot do aktywnego magazynu");
+            Main();
             break;
         default:
             Main();
@@ -237,6 +253,40 @@ void Main()
             Console.WriteLine($"Średni poziom dziwności: {averageWeirdness:F1}");
             Main();
             return;
+        }
+    }
+
+    void ChangeActiveStorage()
+    {
+        if (storages.Count == 0)
+        {
+            Console.WriteLine("Nie ma żadnych magazynów.");
+            Main();
+            return;
+        }
+        else
+        {
+            Console.WriteLine("Lista magazynów:");
+            foreach (var storage in storages)
+            {
+                Console.WriteLine("Magazyn nr. " + (storages.IndexOf(storage) + 1).ToString());
+            }
+
+            Console.WriteLine("Podaj numer magazynu: ");
+            int storageNumber = int.Parse(Console.ReadLine());
+            if (storageNumber > storages.Count || storageNumber < 1)
+            {
+                Console.WriteLine("Nie ma takiego magazynu.");
+                Main();
+                return;
+            }
+            else
+            {
+                activeStorage = storages[storageNumber - 1];
+                Console.WriteLine($"Aktywny magazyn zmieniony na magazyn nr. {storageNumber}");
+                Main();
+                return;
+            }
         }
     }
 }
