@@ -2,7 +2,7 @@
 using MagazynDziwnychPrzedmiotów_2_Legit__Back_C_;
 
 List<Storage> storages = new List<Storage>();
-Storage activeStorage;
+Storage activeStorage = null;
 
 Main();
 
@@ -23,7 +23,7 @@ void Main()
             //ListStoragesP();
             break;
         case "m":
-            //ShowStorage();
+            ShowStorage();
             break;
         case "ml":
             //ListStorage();
@@ -32,20 +32,18 @@ void Main()
             //ListStorageFOH();
             break;
         case "ms":
-            ShowItem();
+            //ShowItem();
             break;
         case "ma":
             //AverageWeirdness();
             break;
         case "mc":
-            AddItem();
+            //AddItem();
             break;
         default:
             Main();
             break;
     }
-
-
 
     void CreateStorage()
     {
@@ -61,8 +59,34 @@ void Main()
 
         storages.Add(storage);
         activeStorage = storage;
+
+        Main();
     }
 
+    void ShowStorage()
+    {
+        if (activeStorage == null)
+        {
+            Console.WriteLine("Nie ma żadnych magazynów.");
+            Main();
+            return;
+        }
+        else
+        {
+            Console.WriteLine("Aktywny magazyn:");
+            Console.WriteLine("Magazyn nr. " + (storages.IndexOf(activeStorage) + 1).ToString());
+            int capacity = activeStorage.GetCapacity();
+            int currentItemCount = activeStorage.GetCurrentItemCount();
+            float maxCombinedWeight = activeStorage.GetMaxCombinedWeight();
+            float contentWeight = activeStorage.GetContentWeight();
+            Console.Write($"Pojemność: {capacity} \n Ilość Przedmiotów: {currentItemCount} \n Udźwig: {maxCombinedWeight} \n Waga zawartości: {contentWeight}");
+
+            Main();
+            return;
+        }
+    }
+
+    /*
     void AddItem()
     {
         Console.WriteLine("Podaj nazwę przedmiotu: ");
@@ -102,4 +126,5 @@ void Main()
 
         Main();
     }
+    */
 }
