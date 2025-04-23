@@ -17,7 +17,7 @@ void Main()
             CreateStorage();
             break;
         case "sl":
-            //ListStorages();
+            ListStorages();
             break;
         case "slp":
             //ListStoragesP();
@@ -79,11 +79,35 @@ void Main()
             int currentItemCount = activeStorage.GetCurrentItemCount();
             float maxCombinedWeight = activeStorage.GetMaxCombinedWeight();
             float contentWeight = activeStorage.GetContentWeight();
-            Console.Write($"Pojemność: {capacity} \n Ilość Przedmiotów: {currentItemCount} \n Udźwig: {maxCombinedWeight} \n Waga zawartości: {contentWeight}");
+            Console.Write($"Pojemność: {capacity} \n Ilość Przedmiotów: {currentItemCount} \n Udźwig: {maxCombinedWeight} \n Waga zawartości: {contentWeight} \n");
 
             Main();
             return;
         }
+    }
+
+    void ListStorages()
+    {
+        if (storages.Count == 0)
+        {
+            Console.WriteLine("Nie ma żadnych magazynów.");
+            Main();
+            return;
+        }
+        else
+        {
+            Console.WriteLine("Lista magazynów:");
+            for (int i = 0; i < storages.Count; i++)
+            {
+                Console.WriteLine("Magazyn nr. " + (i + 1).ToString());
+                int capacity = storages[i].GetCapacity();
+                int currentItemCount = storages[i].GetCurrentItemCount();
+                float maxCombinedWeight = storages[i].GetMaxCombinedWeight();
+                float contentWeight = storages[i].GetContentWeight();
+                Console.Write($"Pojemność: {capacity} \n Ilość Przedmiotów: {currentItemCount} \n Udźwig: {maxCombinedWeight} \n Waga zawartości: {contentWeight}");
+            }
+        }
+        Main();
     }
 
     /*
