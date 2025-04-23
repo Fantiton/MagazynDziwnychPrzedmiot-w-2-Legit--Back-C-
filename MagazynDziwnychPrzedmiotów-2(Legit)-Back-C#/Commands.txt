@@ -1,0 +1,25 @@
+﻿Lista Komend:
+
+Komendy operacji na magazynach (s)
+
+sc - Tworzy nowy magazyn
+sl - Wyświetla listę magazynów
+slp - Wyświetla listę magazynów wraz z % zapełnienia
+sch - zmienia aktywny magazyn
+
+Komendy operacji na aktywnym magazynie (m)
+
+m - Wyświetla aktywny magazyn
+ml - Wyświetla listę przedmiotów w aktywnym magazynie
+	ml foh - Wyświetla listę delikatnych lub przekraczających podaną wagę przedmiotów w aktywnym magazynie
+ms - Wyświetla szczegóły przedmiotu w aktywnym magazynie
+ma - Wyświetla średnią dziwność przedmiotów w aktywnym magazynie
+mc - Dodaje przedmiot do aktywnego magazynu
+
+Komendy Usuwające (d)
+
+ds - Usuwa magazyn (razem z zawartością)
+dsa - Usuwa aktywny magazyn
+di - Usuwa przedmiot z aktywnego magazynu
+
+
