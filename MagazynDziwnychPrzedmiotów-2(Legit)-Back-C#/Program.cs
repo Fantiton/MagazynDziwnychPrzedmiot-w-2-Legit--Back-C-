@@ -110,6 +110,21 @@ void Main()
         Main();
     }
 
+    void ListStorage()
+    {
+        if (activeStorage == null)
+        {
+            Console.WriteLine("Nie ma żadnych magazynów.");
+            Main();
+            return;
+        }
+        else
+        {
+            activeStorage.ListAll();
+        }
+        Main();
+    }
+
     /*
     void AddItem()
     {
